@@ -300,172 +300,38 @@ footer{background:#0f1723;padding:28px;text-align:center;color:rgba(255,255,255,
   </div>
 
   <div class="video-cta">
-    <div class="vcta-h">Понравился формат? 🌊</div>
-    <div class="vcta-p">Если тренировка зашла, забирай пакет из 10 полноценных тренировок или сразу вступай в закрытый клуб. Выбирай свой путь 👇</div>
-    <a href="#paths" class="btn-main" style="padding:16px 36px;font-size:14px;">Выбрать свой путь ↓</a>
+    <div class="vcta-h">Понравилось? Это только одна тренировка 🌊</div>
+    <div class="vcta-p">Хочешь заметно подтянуть живот за 7 дней? Забирай «Неделю для плоского живота»: тренировка на каждый день и рацион без голода. Всего 290 ₽.</div>
+    <a href="#week" class="btn-main" style="padding:16px 36px;font-size:14px;">Смотреть, что внутри ↓</a>
   </div>
 </div>
 <!-- ДВА ПУТИ -->
 
-<!-- ТЕСТ -->
-<div class="quiz-section" id="quiz">
-  <div class="quiz-wrap">
-    <span class="sec-tag">тест за 10 секунд</span>
-    <h2 class="sec-h">Какая программа клуба<br>подойдёт именно тебе?</h2>
-    <p class="sec-p">Ответь на 2 вопроса, и я подскажу, с чего лучше начать.</p>
-
-    <div class="quiz-card" id="quiz-q1">
-      <div class="quiz-q">Какая у тебя цель?</div>
-      <div class="quiz-opts">
-        <button class="quiz-opt" onclick="quizAnswer('goal','lose')">Похудеть, согнать лишний вес</button>
-        <button class="quiz-opt" onclick="quizAnswer('goal','tone')">Подтянуть тело, добавить рельеф</button>
-        <button class="quiz-opt" onclick="quizAnswer('goal','restart')">Вернуться в форму после перерыва</button>
-      </div>
-    </div>
-
-    <div class="quiz-card" id="quiz-q2" style="display:none;">
-      <div class="quiz-q">Как оцениваешь свою подготовку?</div>
-      <div class="quiz-opts">
-        <button class="quiz-opt" onclick="quizAnswer('level','new')">Новичок, почти не тренировалась</button>
-        <button class="quiz-opt" onclick="quizAnswer('level','some')">Есть опыт, но нерегулярно</button>
-        <button class="quiz-opt" onclick="quizAnswer('level','regular')">Тренируюсь регулярно</button>
-      </div>
-    </div>
-
-    <div class="quiz-result" id="quiz-result" style="display:none;">
-      <div class="qr-badge">Тебе подходит</div>
-      <h3 class="qr-title" id="qr-title"></h3>
-      <p class="qr-desc" id="qr-desc"></p>
-      <p class="qr-extra">Плюс каждый месяц в клубе выходит новая программа, рационы питания и живой чат поддержки.</p>
-      <a href="https://t.me/FitnessTrainingX_bot" class="btn-main" style="margin-top:4px;">Вступить в клуб →</a>
-      <div class="qr-alt">Хочешь начать с малого? Есть <a href="#package">пакет из 10 тренировок за 1290 ₽</a></div>
-      <div class="qr-reset" onclick="quizReset()">Пройти ещё раз</div>
-    </div>
-  </div>
-</div>
-
-<style>
-.quiz-section{padding:90px 80px;background:var(--warm);text-align:center;}
-.quiz-wrap{max-width:640px;margin:0 auto;}
-.quiz-card{background:#fff;border-radius:20px;padding:32px 28px;margin-top:36px;box-shadow:0 8px 32px rgba(0,0,0,0.05);}
-.quiz-q{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:22px;}
-.quiz-opts{display:flex;flex-direction:column;gap:12px;}
-.quiz-opt{background:var(--warm);border:2px solid transparent;border-radius:14px;padding:16px 20px;font-size:15px;font-weight:600;color:var(--text);cursor:pointer;transition:all .18s;text-align:left;font-family:inherit;}
-.quiz-opt:hover{border-color:var(--blush);background:var(--blush-pale);}
-.quiz-result{background:#fff;border-radius:20px;padding:36px 28px;margin-top:36px;box-shadow:0 8px 32px rgba(0,0,0,0.05);border:2px solid var(--blush);}
-.qr-badge{display:inline-block;background:var(--blush-pale);color:var(--blush-dark);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:7px 16px;border-radius:20px;margin-bottom:16px;}
-.qr-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);margin-bottom:12px;}
-.qr-desc{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
-.qr-extra{font-size:13.5px;color:var(--muted);margin-bottom:22px;}
-.qr-alt{font-size:13px;color:var(--muted);margin-top:16px;}
-.qr-alt a{color:var(--blush-dark);font-weight:600;text-decoration:none;}
-.qr-reset{font-size:12.5px;color:var(--muted);text-decoration:underline;cursor:pointer;margin-top:14px;}
-@media(max-width:640px){.quiz-section{padding:60px 24px;}}
-</style>
-<script>
-const quizState = {goal:null, level:null};
-function quizAnswer(key, value){
-  quizState[key] = value;
-  if(key==='goal'){
-    document.getElementById('quiz-q1').style.display='none';
-    document.getElementById('quiz-q2').style.display='block';
-  } else {
-    showQuizResult();
-  }
-}
-function showQuizResult(){
-  document.getElementById('quiz-q2').style.display='none';
-  let program, desc;
-  if(quizState.goal==='restart' || quizState.level==='new'){
-    program = 'Новичок';
-    desc = 'Мягкий вход без тяжёлой силовой нагрузки и щадящая прогрессия, чтобы тело привыкало постепенно, без перегруза и травм.';
-  } else if(quizState.goal==='lose'){
-    program = 'Интенсив';
-    desc = 'Высокий темп и объём нагрузки для активного жиросжигания, когда тело уже готово к более серьёзной работе.';
-  } else {
-    program = 'Рельеф';
-    desc = 'Акцент на тонус и форму тела для тех, кто уже в процессе и хочет прицельно проработать рельеф.';
-  }
-  document.getElementById('qr-title').textContent = 'Программа «' + program + '»';
-  document.getElementById('qr-desc').textContent = desc + ' Она есть в закрытом клубе.';
-  document.getElementById('quiz-result').style.display='block';
-}
-function quizReset(){
-  quizState.goal=null; quizState.level=null;
-  document.getElementById('quiz-result').style.display='none';
-  document.getElementById('quiz-q2').style.display='none';
-  document.getElementById('quiz-q1').style.display='block';
-}
-</script>
-
-<div id="paths" class="paths-section">
-  <div class="paths-wrap">
-    <span class="sec-tag">выбери свой путь</span>
-    <h2 class="sec-h">Понравился формат?<br>Вот два варианта продолжить</h2>
-    <div class="paths-grid">
-
-      <div class="path-card path-mini">
-        <span class="path-tag">Решить конкретную задачу</span>
-        <div class="path-icon">🎬</div>
-        <h3 class="path-h">Пакет домашних тренировок</h3>
-        <p class="path-p">10 полноценных тренировок со мной, прогрессия по неделям и рацион питания с рецептами. Всё остаётся у тебя навсегда.</p>
-        <div class="path-price"><span style="font-size:22px;vertical-align:super;">₽</span>1290</div>
-        <a href="#package" class="btn-pink">Смотреть пакет →</a>
-        <div class="path-hint">Доступ навсегда · Оплата один раз</div>
-      </div>
-
-      <div class="path-card path-club">
-        <span class="path-tag">Сразу всё и навсегда</span>
-        <div class="path-icon">🏆</div>
-        <h3 class="path-h">Закрытый клуб</h3>
-        <p class="path-p">200+ тренировок, готовые программы, питание, программа месяца и живой чат девочек.</p>
-        <div class="path-price"><span style="font-size:22px;vertical-align:super;">₽</span>1800</div>
-        <a href="https://t.me/FitnessTrainingX_bot" class="btn-purple">Вступить в клуб →</a>
-        <div class="path-hint">Подписка от 990 руб/мес</div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- МИНИ-КУРС -->
-<div id="package" class="package">
+<!-- НЕДЕЛЯ ДЛЯ ПЛОСКОГО ЖИВОТА -->
+<div id="week" class="package">
   <div class="pkg-wrap">
-    <span class="sec-tag">пакет домашних тренировок</span>
-    <h2 class="sec-h">10 тренировок со мной,<br>твои навсегда</h2>
+    <span class="sec-tag">мини-программа · 7 дней</span>
+    <h2 class="sec-h">Неделя для<br>плоского живота</h2>
     <div class="pkg-top">
       <div>
-        <p class="sec-p" style="margin-bottom:24px;">Полноценные тренировки со мной на каждую группу мышц, прогрессия по неделям чтобы не застревать на месте, и готовый рацион питания с рецептами под твою калорийность. Платишь один раз, доступ остаётся навсегда.</p>
-        <div class="price-box">
-          <div class="price-big"><span style="font-size:26px;vertical-align:super;">₽</span>1290</div>
-          <div class="price-sub">Доступ навсегда · Оплата один раз</div>
-          <a href="https://link.payform.ru/?paymentLinkId=777ed2e8-8d84-42a5-abe2-cd30a94455bf" class="btn-w">Купить пакет за 1290 руб →</a>
-          <div class="btn-hint-w">Доступ откроется сразу после оплаты</div>
-        </div>
+        <p class="sec-p" style="margin-bottom:16px;">Каждый день короткая табата на пресс со мной и понятное меню на день. Без зала, без голодовок и без сложных рецептов. Через неделю живот подтянутее, а вздутия заметно меньше.</p>
+        <p class="sec-p" style="margin-bottom:24px;">Табата идёт 4 минуты, повторяешь от 2 до 6 кругов. Новичкам хватит двух, если хочется нагрузки больше, делай все шесть.</p>
+      </div>
+      <div class="price-box">
+        <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:10px;">цена недели</div>
+        <div class="price-big"><span style="font-size:26px;vertical-align:super;">₽</span>290</div>
+        <div class="price-sub">Оплата один раз · доступ остаётся у тебя</div>
+        <a href="https://link.payform.ru/?paymentLinkId=a7596345-00c8-467c-b0a6-5477b7ea6d01" class="btn-w">Забрать неделю за 290 ₽ →</a>
+        <div class="btn-hint-w">Ссылка на программу придёт на почту сразу после оплаты</div>
       </div>
     </div>
     <div class="pkg-cards">
-      <div class="pkg-card"><div class="pc-ico">🍑</div><div class="pc-title">Ягодицы и ноги</div><div class="pc-desc">Две тренировки на объём и силу нижней части тела.</div></div>
-      <div class="pkg-card"><div class="pc-ico">💪</div><div class="pc-title">Верх тела</div><div class="pc-desc">Руки, плечи и спина. Есть базовая и усложнённая версия.</div></div>
-      <div class="pkg-card"><div class="pc-ico">🔥</div><div class="pc-title">Кардио</div><div class="pc-desc">Динамичные тренировки для сжигания калорий.</div></div>
-      <div class="pkg-card"><div class="pc-ico">🧘</div><div class="pc-title">Кор и пресс</div><div class="pc-desc">Укрепление мышц живота и глубокого кора.</div></div>
-      <div class="pkg-card"><div class="pc-ico">🌿</div><div class="pc-title">Растяжка</div><div class="pc-desc">Восстановление и гибкость после силовых тренировок.</div></div>
-      <div class="pkg-card"><div class="pc-ico">🥦</div><div class="pc-title">Рацион на 4 недели</div><div class="pc-desc">Готовые рецепты под 5 уровней калорийности, список покупок.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ПОЧЕМУ -->
-<div class="why-section">
-  <div class="why-wrap">
-    <span class="sec-tag">что ты получишь</span>
-    <h2 class="sec-h">Тренировки навсегда,<br>без подписок и ограничений</h2>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-ico">🏋️</div><div class="why-title">Гантели и резинки</div><div class="why-desc">Минимальный инвентарь, который легко найти дома или купить недорого.</div></div>
-      <div class="why-card"><div class="why-ico">▶️</div><div class="why-title">Просто включай и повторяй</div><div class="why-desc">Никаких инструкций, просто смотришь и делаешь за мной.</div></div>
-      <div class="why-card"><div class="why-ico">📈</div><div class="why-title">Прогрессия по неделям</div><div class="why-desc">Не застреваешь на месте: нагрузка растёт вместе с тобой.</div></div>
-      <div class="why-card"><div class="why-ico">🥦</div><div class="why-title">Питание под контролем</div><div class="why-desc">Готовый рацион с рецептами под твою калорийность.</div></div>
-      <div class="why-card"><div class="why-ico">♾️</div><div class="why-title">Доступ навсегда</div><div class="why-desc">Платишь один раз, материалы остаются у тебя без ограничений по времени.</div></div>
+      <div class="pkg-card"><div class="pc-ico">🔥</div><div class="pc-title">7 табат на пресс</div><div class="pc-desc">Новая тренировка на каждый день плюс суставная разминка и заминка.</div></div>
+      <div class="pkg-card"><div class="pc-ico">🎁</div><div class="pc-title">Бонусная тренировка</div><div class="pc-desc">Финальная тренировка на 8 день, чтобы почувствовать, как выросла сила.</div></div>
+      <div class="pkg-card"><div class="pc-ico">🥦</div><div class="pc-title">Рацион на 7 дней</div><div class="pc-desc">Под 3 уровня калорийности. Переключаешь свой, и граммовки пересчитываются.</div></div>
+      <div class="pkg-card"><div class="pc-ico">🫧</div><div class="pc-title">Без вздутия</div><div class="pc-desc">Из меню убраны продукты, которые раздувают живот. Плюс памятка с привычками.</div></div>
+      <div class="pkg-card"><div class="pc-ico">🛒</div><div class="pc-title">Список покупок</div><div class="pc-desc">Всё на неделю одним списком и таблица замен, если чего-то нет в магазине.</div></div>
+      <div class="pkg-card"><div class="pc-ico">📏</div><div class="pc-title">Трекер и замер талии</div><div class="pc-desc">Отмечаешь дни и сравниваешь талию в первый и восьмой день.</div></div>
     </div>
   </div>
 </div>
@@ -510,45 +376,26 @@ function quizReset(){
 
 
 
-<!-- КЛУБ -->
-<div class="club-section">
-  <span class="sec-tag">или сразу всё и навсегда</span>
-  <h2 class="sec-h">Хочешь больше?<br>Вступай в закрытый клуб</h2>
-  <p class="sec-p">В клубе 200+ тренировок, готовые программы, питание и живое сообщество девочек вместо отдельного пакета.</p>
-  <div class="club-features">
-    <span class="cf">⚡ 200+ тренировок</span>
-    <span class="cf">🛡️ Программа Новичок</span>
-    <span class="cf">🔥 Программа Интенсив</span>
-    <span class="cf">💪 Программа Рельеф</span>
-    <span class="cf">📅 Программа месяца</span>
-    <span class="cf">🥦 Рационы питания</span>
-    <span class="cf">💬 Живой чат</span>
-  </div>
-  <div class="club-price"><span style="font-size:24px;vertical-align:super;">₽</span>1800</div>
-  <div class="club-note">Подписка от 990 руб/мес</div>
-  <a href="https://t.me/FitnessTrainingX_bot" class="btn-main">Вступить в клуб →</a>
-</div>
-
 <!-- ФИНАЛ -->
 <div class="final">
   <span class="sec-tag">начни сегодня</span>
-  <h2 class="sec-h">10 тренировок навсегда,<br>забирай пакет</h2>
-  <p class="sec-p">Доступ сразу после оплаты · Оплата один раз · На любом устройстве</p>
+  <h2 class="sec-h">7 дней, и живот<br>скажет спасибо</h2>
+  <p class="sec-p">Ссылка придёт на почту сразу после оплаты · Открывается на любом устройстве</p>
   <div class="final-wrap">
     <div class="final-card">
       <div class="final-items">
-        <span class="fi">🍑 Ягодицы</span>
-        <span class="fi">💪 Верх тела</span>
-        <span class="fi">🔥 Кардио</span>
-        <span class="fi">🧘 Кор</span>
-        <span class="fi">🌿 Растяжка</span>
-        <span class="fi">🥦 Рацион 4 недели</span>
+        <span class="fi">🔥 7 табат на пресс</span>
+        <span class="fi">🎁 Бонусная тренировка</span>
+        <span class="fi">🥦 Рацион на 7 дней</span>
+        <span class="fi">🛒 Список покупок</span>
+        <span class="fi">📏 Трекер</span>
       </div>
-      <div class="final-price"><span style="font-size:28px;vertical-align:super;">₽</span>1290</div>
-      <div class="final-note">Доступ навсегда · Оплата один раз</div>
-      <a href="https://link.payform.ru/?paymentLinkId=777ed2e8-8d84-42a5-abe2-cd30a94455bf" class="btn-final">Купить пакет за 1290 руб →</a>
-      <div class="btn-hint" style="margin-top:12px;">Доступ откроется сразу после оплаты</div>
+      <div class="final-price"><span style="font-size:28px;vertical-align:super;">₽</span>290</div>
+      <div class="final-note">Оплата один раз · доступ остаётся у тебя</div>
+      <a href="https://link.payform.ru/?paymentLinkId=a7596345-00c8-467c-b0a6-5477b7ea6d01" class="btn-final">Забрать неделю за 290 ₽ →</a>
+      <div class="btn-hint" style="margin-top:12px;">Ссылка придёт на почту сразу после оплаты</div>
     </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:28px;line-height:1.7;">Нужно больше, чем неделя? Есть <a href="https://link.payform.ru/?paymentLinkId=777ed2e8-8d84-42a5-abe2-cd30a94455bf" style="color:var(--blush-dark);font-weight:600;">пакет из 10 тренировок за 1290 ₽</a> и <a href="https://t.me/FitnessTrainingX_bot" style="color:var(--blush-dark);font-weight:600;">закрытый клуб</a> с 200+ тренировками.</p>
   </div>
 </div>
 
